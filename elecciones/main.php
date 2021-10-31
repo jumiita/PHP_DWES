@@ -74,7 +74,6 @@ function getmapVotos($objctResultados){
                $objctResultados[$i] = $objctResultados[$j];
                $objctResultados[$j] = $aux;
            }
-
             }
         }
     return $objctResultados;
