@@ -1,7 +1,7 @@
 <?php
 
 include ("partidos.php");
-include ("votos.php");
+include("provincias.php");
 include ("resultados.php");
 
 $api_url="https://dawsonferrer.com/allabres/apis_solutions/elections/api.php?data=";
@@ -33,11 +33,14 @@ $parties = json_decode(file_get_contents($api_url . "parties"), true);
 function getObjctDistricts($districts){
     $objetoDistritos[] = array();
     for ($i = 0; $i< count($districts);$i++) {
-        $objetoDistritos[$i] = new votos($districts[$i]["id"], $districts[$i]["name"], $districts[$i]["delegates"]);
+        $objetoDistritos[$i] = new provincias($districts[$i]["id"], $districts[$i]["name"], $districts[$i]["delegates"]);
     }
     return $objetoDistritos;
 }
+//echo "<pre>";
 //var_dump(getObjctDistricts($districts));
+
+
 
 
 function getObjctParties($parties){
@@ -64,7 +67,25 @@ $objetoDistritos = getObjctDistricts($districts);
 $objetoPartidos = getObjctParties($parties);
 
 //echo "<pre>";
-//var_dump(getObjctResultados($resultad));
+//var_dump(getmapVotos($objctResultados));
+
+
+function getresult($objctResultados){
+    $provin[] = array();
+    for ($i = 0 ; $i < count($objctResultados);$i++){
+        if ($objctResultados[$i]["district"] == $objctResultados[$i]->getDistrict("Madrid")){
+            $provin [$i] = $objctResultados[$i];
+        }
+        return $provin;
+    }
+
+}
+
+
+echo "<pre>";
+var_dump(getresult($objctResultados));
+
+
 
 function getmapVotos($objctResultados){
     for ($i= 0;$i <count($objctResultados);$i++){
@@ -78,6 +99,50 @@ function getmapVotos($objctResultados){
         }
     return $objctResultados;
 }
+
+//echo "<pre>";
+//var_dump(getmapNombres($objctResultados));
+
+//Ordena Alfabeticamente pero lo que nos interesa que nos da los distritos juntos por ejemplo "todo madrid, todo avila"
+function getmapNombres($objctResultados){
+    for ($i= 0;$i <count($objctResultados);$i++){
+        for ($j =0;$j <count($objctResultados);$j++){
+            if($objctResultados[$i]->getDistrict()> $objctResultados[$j]->getDistrict()){
+                $aux = $objctResultados[$i];
+                $objctResultados[$i] = $objctResultados[$j];
+                $objctResultados[$j] = $aux;
+            }
+        }
+    }
+    return $objctResultados;
+}
+$ordenadoDis = getmapNombres($objctResultados);
+
+function losVotos($ordenadoDis){
+    for ($i = 0 ; $i < count($ordenadoDis);$i++){
+
+    }
+}
+
+
+/*
+function filtarDistritos($o$objetoDistritos,$objctResultados){
+
+    for ($i = 0 ; $i < count($objetoDistritos);$i++){
+        for ($j = 0; $j< count($objctResultados);$j++){
+            if ($objetoDistritos[$i]->getDelegados() == $objetoDistritos[$j]->getDistrict()){
+
+            }
+
+
+        }
+    }
+
+
+}
+*/
+
+
 
 
 //echo "<pre>";

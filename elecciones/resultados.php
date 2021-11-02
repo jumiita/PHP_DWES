@@ -6,6 +6,8 @@ private $district;
 private $party;
 private $votes;
 
+// podria estar bien tener un identificador "id" y "escaños"
+
     /**
      * @param $district
      * @param $party
