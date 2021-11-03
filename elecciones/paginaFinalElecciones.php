@@ -1,27 +1,7 @@
 <?php
-function impar($var)
-{
-    // Retorna siempre que el número entero sea impar
-    return $var & 1;
-}
 
-function par($var)
-{
-    // Retorna siempre que el número entero sea par
-    return !($var & 1);
-}
-
-$array1 = ['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5];
-$array2 = [6, 7, 8, 9, 10, 11, 12];
-
-echo "Impar :\n";
-print_r(array_filter($array1, "impar"));
-echo "Par:\n";
-print_r(array_filter($array2, "par"));
+require ("main.php");
 ?>
-
-
-
 <html lang="es">
 <head>
     <title>Election Results</title>
@@ -40,8 +20,16 @@ table, th, td {
     </style>
 </head>
 <body>
-<form action="index.php" method="post">
-    <select name="district">
+<form action="paginaFinalElecciones.php" method="post">
+    <?php
+    $api_url="https://dawsonferrer.com/allabres/apis_solutions/elections/api.php?data=";
+    $resultad = json_decode(file_get_contents($api_url . "results"), true);
+    $objctResultados = getObjctResultados($resultad);
+    getresult($objctResultados);
+
+
+    ?>
+    <select name="<?php   $distrito = "District"  ?>">
         <option value=''>Selecciona una circumscripción</option>
 <option  value='1'>Madrid</option>
 <option  value='2'>Barcelona</option>
