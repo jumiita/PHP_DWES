@@ -92,6 +92,35 @@ function print_td_by_district_selected($objctResultados, $distric_selected){
     }
 }
 
+$seleccion = get_id_district_selected($objetoDistritos) ;
+
+function get_votos_by_result($objctResultados,$seleccion){
+    // Creamos un array vacio donde meteremos los votos según la selcción que cogemos.
+    $totalVotos[]= array();
+        $count = 0;
+        //recoremos el array de resultados para que meta en el array todos los votos siempre y cuando el nombre del distrito es igual a la selección.
+    foreach ($objctResultados as $resultado) {
+        if ($resultado->getDistrict() == $seleccion) {
+            $totalVotos[$count] = $resultado->getvotes();
+            $count++;
+        }
+    }
+    //////////////////////////////////////////////////
+    //////////////// CALCULAR LOS VOTOS //////////////
+    //////////////////////////////////////////////////
+    print_r($totalVotos);
+    }
+
+//$objctResultados[] = array();
+//    $count = 0;
+//    foreach($resultad as $objeto){
+//        $objctResultados[$count] =  new resultados($objeto["district"],$objeto["party"],$objeto["votes"]);
+//        $count++;
+//    }
+//
+//    return$objctResultados;
+//}
+
 ?>
 
 <html lang="es">
@@ -179,6 +208,7 @@ function print_td_by_district_selected($objctResultados, $distric_selected){
         print_td_by_district_selected($objctResultados, $distric_selected);
 
         cierro_tabla();
+        get_votos_by_result($objctResultados,$seleccion);
     }
     ?>
 
