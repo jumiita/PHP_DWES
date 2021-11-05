@@ -92,7 +92,7 @@ function print_td_by_district_selected($objctResultados, $distric_selected){
     }
 }
 
-$seleccion = get_id_district_selected($objetoDistritos) ;
+//$seleccion = get_id_district_selected($objetoDistritos) ;
 
 function get_votos_by_result($objctResultados,$seleccion){
     // Creamos un array vacio donde meteremos los votos según la selcción que cogemos.
@@ -111,15 +111,45 @@ function get_votos_by_result($objctResultados,$seleccion){
     print_r($totalVotos);
     }
 
-//$objctResultados[] = array();
-//    $count = 0;
-//    foreach($resultad as $objeto){
-//        $objctResultados[$count] =  new resultados($objeto["district"],$objeto["party"],$objeto["votes"]);
-//        $count++;
-//    }
-//
-//    return$objctResultados;
-//}
+
+
+function crivado_votos_tresPorciento($objctResultados){
+
+$countador = 0;
+$tresporciento=0.03;
+$crivado[]= array();
+foreach ($objctResultados as $resultado){
+    if( $resultado->getVotes() > round($objctResultados*$tresporciento)){
+        $crivado[$countador] = $resultado->getVotes();
+        $countador++;
+    }
+}
+return print_r($crivado);
+}
+
+function eleccion_del_segundo_formulario($objctResultados,$objetoDistritos){
+    $party = "parties";
+    $distritoos = "districts";
+
+    $distric_selected = '';
+
+
+        if($party== $_GET['filterBy']){
+            echo "hola caracola";
+//////////////////////////////////////////////////////////////////////
+
+        }
+    foreach ($objetoDistritos as $distrii){
+        if ($distritoos == $_GET['filterBy']){
+            abro_tabla();
+            echo "<tr>";
+            echo "<td>". $distrii->getNombre()."</td>";
+            echo "</tr>";
+            cierro_tabla();
+        }
+    }
+}
+
 
 ?>
 
@@ -199,22 +229,123 @@ function get_votos_by_result($objctResultados,$seleccion){
       </select>
       <input type="submit" value="Filtra"/>
     </form>
-    <?php
+
+    <form action="main.php" method="get" id="filterForm">
+        <div class="form-group">
+            <select class="form-control" name="filterBy" id="filterBy" onchange="filterTypeChange()">
+                <option value="">Seleccionar filtrado</option>
+                <option value="global">Resultados generales</option>
+                <option value="districts">Filtrar por provincia
+                </option>
+                <option value="parties">Filtrar por partido</option>
+            </select>
+        </div>
+
+        </div>
+        <div class="form-group">
+            <select class="form-control " name="party" id="filterParty"
+                    onchange="filter()">
+                <option value=''>Selecciona un partido</option>
+                <option selected value='1'>PARTIDO SOCIALISTA OBRERO ESPAÑOL</option>
+                <option  value='2'>PARTIDO POPULAR</option>
+                <option  value='3'>VOX</option>
+                <option  value='4'>UNIDAS PODEMOS</option>
+                <option  value='5'>CIUDADANOS-PARTIDO DE LA CIUDADANÍA</option>
+                <option  value='6'>ESQUERRA REPUBLICANA DE CATALUNYA-SOBIRANISTES</option>
+                <option  value='7'>EN COMÚ PODEM-GUANYEM EL CANVI</option>
+                <option  value='8'>JUNTS PER CATALUNYA-JUNTS</option>
+                <option  value='9'>EUZKO ALDERDI JELTZALEA-PARTIDO NACIONALISTA VASCO</option>
+                <option  value='10'>MÁS PAÍS-EQUO</option>
+                <option  value='11'>EUSKAL HERRIA BILDU</option>
+                <option  value='12'>CANDIDATURA D'UNITAT POPULAR-PER LA RUPTURA</option>
+                <option  value='13'>PARTIDO ANIMALISTA CONTRA EL MALTRATO ANIMAL</option>
+                <option  value='14'>EN COMÚN-UNIDAS PODEMOS</option>
+                <option  value='15'>MÉS COMPROMÍS</option>
+                <option  value='16'>COALICIÓN CANARIA-NUEVA CANARIAS</option>
+                <option  value='17'>BLOQUE NACIONALISTA GALEGO</option>
+                <option  value='18'>NAVARRA SUMA</option>
+                <option  value='19'>PARTIDO REGIONALISTA DE CANTABRIA</option>
+                <option  value='20'>MÁS PAÍS</option>
+                <option  value='21'>RECORTES CERO-GRUPO VERDE</option>
+                <option  value='22'>POR UN MUNDO MÁS JUSTO</option>
+                <option  value='23'>MÁS PAÍS-CHUNTA ARAGONESISTA-EQUO</option>
+                <option  value='24'>AGRUPACIÓN DE ELECTORES TERUEL EXISTE</option>
+                <option  value='25'>MÉS ESQUERRA</option>
+                <option  value='26'>ANDALUCÍA POR SÍ</option>
+                <option  value='27'>PARTIDO COMUNISTA DE LOS PUEBLOS DE ESPAÑA</option>
+                <option  value='28'>PARTIDO COMUNISTA DE LOS TRABAJADORES DE ESPAÑA</option>
+                <option  value='29'>GEROA BAI</option>
+                <option  value='30'>UNIÓN DEL PUEBLO LEONÉS</option>
+                <option  value='31'>PARTIDO COMUNISTA OBRERO ESPAÑOL</option>
+                <option  value='32'>COALICIÓN POR MELILLA</option>
+                <option  value='33'>ESCAÑOS EN BLANCO</option>
+                <option  value='34'>ESQUERRA REPUBLICANA DEL PAÍS VALENCIÀ</option>
+                <option  value='35'>POR ÁVILA</option>
+                <option  value='36'>AVANT ADELANTE LOS VERDES</option>
+                <option  value='37'>LOS VERDES</option>
+                <option  value='38'>PARTIDO HUMANISTA</option>
+                <option  value='39'>INICIATIVA FEMINISTA</option>
+                <option  value='40'>SOM VALENCIANS EN MOVIMENT</option>
+                <option  value='41'>SOMOS REGIÓN</option>
+                <option  value='42'>IZQUIERDA EN POSITIVO</option>
+                <option  value='43'>AHORA CANARIAS: Alternativa Nacionalista Canaria (ANC) y Unidad del Pueblo</option>
+                <option  value='44'>CONTIGO SOMOS DEMOCRACIA</option>
+                <option  value='45'>CHUNTA ARAGONESISTA</option>
+                <option  value='46'>PLATAFORMA DEL PUEBLO SORIANO</option>
+                <option  value='47'>EXTREMADURA UNIDA</option>
+                <option  value='48'>PARTIDO DEMÓCRATA SOCIAL JUBILADOS EUROPEOS</option>
+                <option  value='49'>PARTIDO LIBERTARIO</option>
+                <option  value='50'>MOVIMIENTO ARAGONES SOCIAL</option>
+                <option  value='51'>UNIDOS Actuando por la Democracia</option>
+                <option  value='52'>PARTIDO REGIONALISTA DEL PAÍS LEONÉS</option>
+                <option  value='53'>ANDECHA ASTUR</option>
+                <option  value='54'>MOVIMIENTO POR LA DIGNIDAD Y LA CIUDADANÍA DE CEUTA</option>
+                <option  value='55'>PUYALON</option>
+                <option  value='56'>FALANGE ESPAÑOLA DE LAS JONS</option>
+                <option  value='57'>AUNA COMUNITAT VALENCIANA</option>
+                <option  value='58'>UNIÓN REGIONALISTA DE CASTILLA Y LEÓN</option>
+                <option  value='59'>CONVERGENCIA ANDALUZA</option>
+                <option  value='60'>FEDERACIÓN DE LOS INDEPENDIENTES DE ARAGÓN</option>
+                <option  value='61'>PARTIDO DE ACCIÓN SOLIDARIA EUROPEA</option>
+                <option  value='62'>PARTIDO REPUBLICANO INDEPENDIENTE SOLIDARIO ANDALUZ</option>
+                <option  value='63'>CENTRADOS</option>
+                <option  value='64'>DEMOCRACIA PLURAL</option>
+                <option  value='65'>IZQUIERDA ANTICAPITALISTA REVOLUCIONARIA</option>
+                <option  value='66'>CONVERXENCIA 21</option>
+                <option  value='67'>UNIÓN DE TODOS</option>
+            </select>
+        </div>
+
+        <input class="" type="submit" value="Filtra">
+    </form>
+
+</body>
+
+
+<?php
     if(isset($_POST['district'])) {
-    
+
+
         $distric_selected = get_id_district_selected($objetoDistritos);
         abro_tabla();
 
         print_td_by_district_selected($objctResultados, $distric_selected);
 
         cierro_tabla();
-        get_votos_by_result($objctResultados,$seleccion);
+       // get_votos_by_result($objctResultados,$seleccion);
+
+        // crivado_votos_tresPorciento($objctResultados);
     }
+
+
+    if(isset($_GET['filterBy'])) {
+
+        eleccion_del_segundo_formulario($objctResultados,$objetoDistritos);
+
+    }
+
+
     ?>
-
-</body>
-
-
 
 
 
