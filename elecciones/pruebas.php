@@ -51,6 +51,11 @@ $objctResultados = getObjctResultados($resultad);
 $objetoDistritos = getObjctDistricts($districts);
 $objetoPartidos = getObjctParties($parties);
 
+
+
+
+
+
 function abro_tabla(){
     echo "<table>";
         echo "<tbody>";
@@ -112,51 +117,8 @@ function get_votos_by_result($objctResultados,$seleccion){
     }
 
 
-
-function crivado_votos_tresPorciento($objctResultados){
-
-$countador = 0;
-$tresporciento=0.03;
-$crivado[]= array();
-foreach ($objctResultados as $resultado){
-    if( $resultado->getVotes() > round($objctResultados*$tresporciento)){
-        $crivado[$countador] = $resultado->getVotes();
-        $countador++;
-    }
-}
-return print_r($crivado);
-}
-
-function eleccion_del_segundo_formulario($objctResultados,$objetoDistritos){
-    $party = "parties";
-    $distritoos = "districts";
-    $distric_selected = '';
-
-    foreach($objctResultados as $resuult) {
-        if($party== $_GET['filterBy']){
-            $distric_selected = $resuult->getParty();
-
-            abro_tabla();
-            echo "<tr>";
-            echo "<td>". $resuult->getParty()."</td>";
-            echo "</tr>";
-            cierro_tabla();
-        }
-
-    }
-    foreach ($objetoDistritos as $distrii){
-        if ($distritoos == $_GET['filterBy']){
-            abro_tabla();
-            echo "<tr>";
-            echo "<td>". $distrii->getNombre()."</td>";
-            echo "</tr>";
-            cierro_tabla();
-        }
-    }
-}
-
-
 ?>
+
 
 <html lang="es">
 <head>
@@ -166,16 +128,118 @@ function eleccion_del_segundo_formulario($objctResultados,$objetoDistritos){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/ammap.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="scripts/spainProvincesLow.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        table, th, td {
-            border: 1px solid black;
-            padding-left: 12px;
-            padding-right: 12px;
+        select {
+            margin-bottom: 10px;
+        }
+
+        body {
+            margin: 20px
         }
     </style>
+    <script type="text/javascript">
+        var map = AmCharts.makeChart("map", {
+            "type": "map",
+            "pathToImages": "http://www.amcharts.com/lib/3/images/",
+            "addClassNames": true,
+            "fontSize": 15,
+            "color": "#FFFFFF",
+            "projection": "mercator",
+            "backgroundAlpha": 1,
+            "backgroundColor": "rgba(80,80,80,1)",
+            "dataProvider": {
+                "map": "spainProvincesLow",
+                "getAreasFromMap": true,
+                "areas": [
+                ]
+            },
+            "balloon": {
+                "horizontalPadding": 15,
+                "borderAlpha": 0,
+                "borderThickness": 1,
+                "verticalPadding": 15
+            },
+            "areasSettings": {
+                "color": "rgba(129,129,129,1)",
+                "outlineColor": "rgba(80,80,80,1)",
+                "rollOverOutlineColor": "rgba(80,80,80,1)",
+                "rollOverBrightness": 20,
+                "selectedBrightness": 20,
+                "selectable": true,
+                "unlistedAreasAlpha": 0,
+                "unlistedAreasOutlineAlpha": 0
+            },
+            "imagesSettings": {
+                "alpha": 1,
+                "color": "rgba(129,129,129,1)",
+                "outlineAlpha": 0,
+                "rollOverOutlineAlpha": 0,
+                "outlineColor": "rgba(80,80,80,1)",
+                "rollOverBrightness": 20,
+                "selectedBrightness": 20,
+                "selectable": true
+            },
+            "linesSettings": {
+                "color": "rgba(129,129,129,1)",
+                "selectable": true,
+                "rollOverBrightness": 20,
+                "selectedBrightness": 20
+            },
+            "zoomControl": {
+                "zoomControlEnabled": true,
+                "homeButtonEnabled": false,
+                "panControlEnabled": false,
+                "right": 38,
+                "bottom": 30,
+                "minZoomLevel": 0.25,
+                "gridHeight": 100,
+                "gridAlpha": 0.1,
+                "gridBackgroundAlpha": 0,
+                "gridColor": "#FFFFFF",
+                "draggerAlpha": 1,
+                "buttonCornerRadius": 2
+            }
+        });
+
+        map.addListener("clickMapObject", function (event) {
+            $(location).attr('href', "?filterBy=districts&district=" + event.mapObject.id);
+        });
+
+        function filterTypeChange() {
+            var filterType = document.getElementById("filterBy").value;
+            if (filterType == "districts") {
+                $("#filterDistrict").removeClass("d-none").addClass("d-block");
+                $("#filterParty").removeClass("d-block").addClass("d-none");
+            } else if (filterType == "parties") {
+                $("#filterParty").removeClass("d-none").addClass("d-block");
+                $("#filterDistrict").removeClass("d-block").addClass("d-none");
+            } else if (filterType == "") {
+                $("#filterParty").removeClass("d-block").addClass("d-none");
+                $("#filterDistrict").removeClass("d-block").addClass("d-none");
+                $(location).attr('href', "map.php");
+            } else if (filterType == "global") {
+                $("#filterParty").removeClass("d-block").addClass("d-none");
+                $("#filterDistrict").removeClass("d-block").addClass("d-none");
+                filter();
+            }
+        }
+
+        function filter() {
+            $("#filterForm").submit();
+        }
+    </script>
 </head>
 <body>
+
+<?php
+
+?>
 <form action="pruebas.php" method="get" id="filterForm">
     <div class="form-group">
         <select class="form-control" name="filterBy" id="filterBy" onchange="filterTypeChange()">
@@ -183,7 +247,7 @@ function eleccion_del_segundo_formulario($objctResultados,$objetoDistritos){
             <option value="global" >Resultados generales</option>
             <option value="districts" >Filtrar por provincia
             </option>
-            <option value="parties" selected>Filtrar por partido</option>
+            <option value="parties" >Filtrar por partido</option>
         </select>
     </div>
     <div class="form-group">
@@ -245,10 +309,10 @@ function eleccion_del_segundo_formulario($objctResultados,$objetoDistritos){
         </select>
     </div>
     <div class="form-group">
-        <select class="form-control " name="party" id="filterParty"
+        <select class="form-control d-none" name="party" id="filterParty"
                 onchange="filter()">
             <option value=''>Selecciona un partido</option>
-            <option selected value='1'>PARTIDO SOCIALISTA OBRERO ESPAÑOL</option>
+            <option  value='1'>PARTIDO SOCIALISTA OBRERO ESPAÑOL</option>
             <option  value='2'>PARTIDO POPULAR</option>
             <option  value='3'>VOX</option>
             <option  value='4'>UNIDAS PODEMOS</option>
@@ -320,8 +384,8 @@ function eleccion_del_segundo_formulario($objctResultados,$objetoDistritos){
     <input class="d-none" type="submit" value="Filtra"/>
 </form>
 
-</body>
 
+</body>
 
 <?php
     if(isset($_POST['district'])) {
