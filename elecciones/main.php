@@ -1,154 +1,9 @@
 <?php
-
-include ("partidos.php");
-include("provincias.php");
-include ("resultados.php");
-
-$api_url="https://dawsonferrer.com/allabres/apis_solutions/elections/api.php?data=";
-$resultad = json_decode(file_get_contents($api_url . "results"), true);
-$api_url= "https://dawsonferrer.com/allabres/apis_solutions/elections/api.php?data=";
-$districts = json_decode(file_get_contents($api_url . "districts"), true);
-$api_url="https://dawsonferrer.com/allabres/apis_solutions/elections/api.php?data=";
-$parties = json_decode(file_get_contents($api_url . "parties"), true);
-
-
-function getObjctDistricts($districts){
-    $objetoDistritos[] = array();
-    for ($i = 0; $i< count($districts);$i++) {
-        $objetoDistritos[$i] = new provincias($districts[$i]["id"], $districts[$i]["name"], $districts[$i]["delegates"]);
-    }
-    return $objetoDistritos;
-}
-
-function getObjctParties($parties){
-    $Objetopartidos[] = array();
-    for ($i =0; $i < count($parties);$i++){
-        $Objetopartidos[$i] =  new partidos($parties[$i]["id"],$parties[$i]["name"],$parties[$i]["acronym"],$parties[$i]["logo"]);
-    }
-    return$Objetopartidos;
-}
-
-function getObjctResultados($resultad){
-    $objctResultados[] = array();
-    $count = 0;
-    foreach($resultad as $objeto){
-        $objctResultados[$count] =  new resultados($objeto["district"],$objeto["party"],$objeto["votes"]);
-        $count++;
-    }
-
-    return$objctResultados;
-}
-
-$objctResultados = getObjctResultados($resultad);
-$objetoDistritos = getObjctDistricts($districts);
-$objetoPartidos = getObjctParties($parties);
-
-function abro_tabla(){
-    echo "<table>";
-        echo "<tbody>";
-            echo "<tr>";
-                echo "<th>Circumscripción</th>";
-                echo "<th>Partido</th>";
-                echo "<th>Votos</th>";
-                echo "<th>Escaños</th>";
-            echo "</tr>";
-}
-
-function cierro_tabla(){
-        echo "</tbody>";
-    echo "</table>";
-}
-
-function get_id_district_selected($objetoDistritos){
-    $distric_selected = '';
-    foreach($objetoDistritos as $distrito) {
-        // Recorremos los distritos en busca de el id seleccionado.
-        if($distrito->getId() == $_GET['district']){
-            $distric_selected = $distrito->getNombre();
-        }
-    }
-    return $distric_selected;
-}
-
-function print_td_by_district_selected($objctResultados, $distric_selected){
-    foreach($objctResultados as $resultado) {
-        // Obtenemos tantas row como resultados encontremos en los distritos
-        if($resultado->getDistrict() == $distric_selected){
-            echo "<tr>";
-                echo "<td>".$resultado->getDistrict()."</td>";
-                echo "<td>".$resultado->getParty()."</td>";
-                echo "<td>".$resultado->getVotes()."</td>";
-                echo "<td>10</td>";
-            echo "</tr>";
-        }
-    }
-}
-
-//los escaños por provincias y
-//los votos totales por provincias
-//total de votos / 0,03 = los que reciben escaños
-
-
-function get_votos_by_result($objctResultados,$seleccion){
-    // Creamos un array vacio donde meteremos los votos según la selcción que cogemos.
-    $totalVotos[]= array();
-        $count = 0;
-        //recoremos el array de resultados para que meta en el array todos los votos siempre y cuando el nombre del distrito es igual a la selección.
-    foreach ($objctResultados as $resultado) {
-        if ($resultado->getDistrict() == $seleccion) {
-            $totalVotos[$count] = $resultado->getvotes();
-            $count++;
-        }
-    }
-    //////////////////////////////////////////////////
-    //////////////// CALCULAR LOS VOTOS //////////////escanos[$posicion] += 1;
-    ////////////////////////////////////////////////// $divArrayVotos[$posicion] = $arrayVotos[$posicion] / ($escanos[$posicion] + 1);
-    //////////////////////////////////////////////////
-    print_r($totalVotos);
-    }
-
-function crivado_votos_tresPorciento($objctResultados){
-
-$countador = 0;
-$tresporciento=0.03;
-$crivado[]= array();
-foreach ($objctResultados as $resultado){
-    if( $resultado->getVotes() > round($objctResultados*$tresporciento)){
-        $crivado[$countador] = $resultado->getVotes();
-        $countador++;
-    }
-}
-return print_r($crivado);
-}
-
-    function get_id_partido_selected($objetoPartidos){
-        $partido_selected = '';
-        foreach($objetoPartidos as $partido) {
-            // Recorremos los distritos en busca de el id seleccionado.
-            if($partido->getId() == $_GET['party']){
-                $partido_selected = $partido->getName();
-            }
-        }
-        return $partido_selected;
-    }
-function print_td_by_partido_selected($objetoPartidos, $partido_selected, $objctResultados){
-    foreach ($objetoPartidos as $part){
-        foreach ($objctResultados as $res){
-        if ($part->getName() == $partido_selected && $res->getParty() == $part->getName()){
-            echo "<tr>";
-            echo "<td>".$res->getDistrict()."</td>";
-            echo "<td><img src=".$part->getLogo()."><strong>".$part->getAcronym()."<strong> - ".$res->getParty()."</td>";
-            echo "<td>".$res->getVotes()."</td>";
-            echo "<td>10</td>";
-            echo "</tr>";
-
-        }
-    }
-    }
-}
-
+include("funciones.php");
 ?>
 
+//En esta clase main he decidido dejar solo el html para no saturar ya que como consejo de un compañero de trabajo.
+//En el main anterior llegue a las 450 lineas y era muy lioso cada vez que llamas a una funcion o si te falla algo..
 <html lang="es">
 <head>
     <title>Election Results</title>
@@ -157,132 +12,33 @@ function print_td_by_partido_selected($objetoPartidos, $partido_selected, $objct
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
-    <script type="text/javascript" src="scripts/ammap.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="scripts/spainProvincesLow.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
+    <script type="text/javascript" src="funcionesParaFormularios.js"></script>
+    <style>body {
+            margin: 20px
+        }
         select {
             margin-bottom: 10px;
         }
-
-        table, th, td {
-            border: 1px solid black;
-            padding-left: 12px;
-            padding-right: 12px;
-        }
-        body {
-            margin: 20px
+        .form-group.district
+        , .form-group.party{
+            display: none;
         }
     </style>
-    <script type="text/javascript">
-        var map = AmCharts.makeChart("map", {
-            "type": "map",
-            "pathToImages": "http://www.amcharts.com/lib/3/images/",
-            "addClassNames": true,
-            "fontSize": 15,
-            "color": "#FFFFFF",
-            "projection": "mercator",
-            "backgroundAlpha": 1,
-            "backgroundColor": "rgba(80,80,80,1)",
-            "dataProvider": {
-                "map": "spainProvincesLow",
-                "getAreasFromMap": true,
-                "areas": [
-                ]
-            },
-            "balloon": {
-                "horizontalPadding": 15,
-                "borderAlpha": 0,
-                "borderThickness": 1,
-                "verticalPadding": 15
-            },
-            "areasSettings": {
-                "color": "rgba(129,129,129,1)",
-                "outlineColor": "rgba(80,80,80,1)",
-                "rollOverOutlineColor": "rgba(80,80,80,1)",
-                "rollOverBrightness": 20,
-                "selectedBrightness": 20,
-                "selectable": true,
-                "unlistedAreasAlpha": 0,
-                "unlistedAreasOutlineAlpha": 0
-            },
-            "imagesSettings": {
-                "alpha": 1,
-                "color": "rgba(129,129,129,1)",
-                "outlineAlpha": 0,
-                "rollOverOutlineAlpha": 0,
-                "outlineColor": "rgba(80,80,80,1)",
-                "rollOverBrightness": 20,
-                "selectedBrightness": 20,
-                "selectable": true
-            },
-            "linesSettings": {
-                "color": "rgba(129,129,129,1)",
-                "selectable": true,
-                "rollOverBrightness": 20,
-                "selectedBrightness": 20
-            },
-            "zoomControl": {
-                "zoomControlEnabled": true,
-                "homeButtonEnabled": false,
-                "panControlEnabled": false,
-                "right": 38,
-                "bottom": 30,
-                "minZoomLevel": 0.25,
-                "gridHeight": 100,
-                "gridAlpha": 0.1,
-                "gridBackgroundAlpha": 0,
-                "gridColor": "#FFFFFF",
-                "draggerAlpha": 1,
-                "buttonCornerRadius": 2
-            }
-        });
-
-        map.addListener("clickMapObject", function (event) {
-            $(location).attr('href', "?filterBy=districts&district=" + event.mapObject.id);
-        });
-
-        function filterTypeChange() {
-            var filterType = document.getElementById("filterBy").value;
-            if (filterType == "districts") {
-                $("#filterDistrict").removeClass("d-none").addClass("d-block");
-                $("#filterParty").removeClass("d-block").addClass("d-none");
-            } else if (filterType == "parties") {
-                $("#filterParty").removeClass("d-none").addClass("d-block");
-                $("#filterDistrict").removeClass("d-block").addClass("d-none");
-            } else if (filterType == "") {
-                $("#filterParty").removeClass("d-block").addClass("d-none");
-                $("#filterDistrict").removeClass("d-block").addClass("d-none");
-                $(location).attr('href', "map.php");
-            } else if (filterType == "global") {
-                $("#filterParty").removeClass("d-block").addClass("d-none");
-                $("#filterDistrict").removeClass("d-block").addClass("d-none");
-                filter();
-            }
-        }
-
-        function filter() {
-            $("#filterForm").submit();
-        }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<form action="main.php" method="get" id="filterForm">
-    <div class="form-group">
-        <select class="form-control" name="filterBy" id="filterBy" onchange="filterTypeChange()">
-            <option value="">Seleccionar filtrado</option>
-            <option value="global" >Resultados generales</option>
-            <option value="districts" >Filtrar por provincia
-            </option>
+    <div class="form-group general">
+        <select class="form-control" name="first_filter" id="first_filter">
+            <option value="" selected >Seleccionar filtrado</option>
+            <option value="global">Resultados generales</option>
+            <option value="districts" >Filtrar por provincia</option>
             <option value="parties" >Filtrar por partido</option>
         </select>
     </div>
-    <div class="form-group">
-        <select class="form-control d-none" name="district"
-                id="filterDistrict" onchange="filter()">
+    <div class="form-group district">
+        <select class="form-control" name="district_filter" id="district_filter">
             <option value=''>Selecciona una circumscripción</option>
             <option  value='1'>Madrid</option>
             <option  value='2'>Barcelona</option>
@@ -338,9 +94,8 @@ function print_td_by_partido_selected($objetoPartidos, $partido_selected, $objct
             <option  value='52'>Melilla</option>
         </select>
     </div>
-    <div class="form-group">
-        <select class="form-control d-none" name="party" id="filterParty"
-                onchange="filter()">
+    <div class="form-group party">
+        <select class="form-control" name="party_filter" id="party_filter">
             <option value=''>Selecciona un partido</option>
             <option  value='1'>PARTIDO SOCIALISTA OBRERO ESPAÑOL</option>
             <option  value='2'>PARTIDO POPULAR</option>
@@ -411,37 +166,7 @@ function print_td_by_partido_selected($objetoPartidos, $partido_selected, $objct
             <option  value='67'>UNIÓN DE TODOS</option>
         </select>
     </div>
-    <input class="d-none" type="submit" value="Filtra"/>
-</form>
-
 
 </body>
 
-<?php
-    if(isset($_GET['district'])) {
-
-        $distric_selected = get_id_district_selected($objetoDistritos);
-        abro_tabla();
-
-        print_td_by_district_selected($objctResultados, $distric_selected);
-
-        cierro_tabla();
-       // get_votos_by_result($objctResultados,$seleccion);
-
-        // crivado_votos_tresPorciento($objctResultados);
-    }
-
-
-    if(isset($_GET['filterBy'])) {
-        $partido_selected =get_id_partido_selected($objetoPartidos);
-        abro_tabla();
-        print_td_by_partido_selected($objetoPartidos, $partido_selected,$objctResultados);
-        cierro_tabla();
-    }
-
-
-    ?>
-
-
-
-    
+<div id="tabla_calculos"></div>

@@ -1,5 +1,6 @@
 <?php
-
+//En esta clase creamos los partidos politicos donde creamos los atributos,
+// getter y setters donde llamaremos o meteremos la info necesaria.
 class partidos
 {
 private $id;
@@ -13,6 +14,7 @@ private $logo;
      * @param $acronym
      * @param $logo
      */
+    //Creamos un constructyor donde metemos los atributos como parametros
     public function __construct($id, $name, $acronym, $logo)
     {
         $this->id = $id;
@@ -40,7 +42,7 @@ private $logo;
     /**
      * @return mixed
      */
-    public function getName()
+    public function getNombre()
     {
         return $this->name;
     }
@@ -48,7 +50,7 @@ private $logo;
     /**
      * @param mixed $name
      */
-    public function setName($name)
+    public function setNombre($name)
     {
         $this->name = $name;
     }

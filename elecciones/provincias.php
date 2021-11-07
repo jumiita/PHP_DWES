@@ -1,8 +1,9 @@
 <?php
-
+//En esta clase creamos las provincias politicos donde creamos los atributos,
+// getter y setters donde llamaremos o meteremos la info necesaria.
 class provincias
 {
-
+//Creación de atributos que los ponemos en privado para que no se puedan usar fuera de esta clase.
     private $id;
     private $nombre;
     private $delegados;
@@ -12,6 +13,7 @@ class provincias
      * @param $nombre
      * @param $delegados
      */
+    //Creamos un constructyor donde metemos los atributos como parametros
     public function __construct($id, $nombre, $delegados)
     {
         $this->id = $id;
@@ -22,6 +24,7 @@ class provincias
     /**
      * @return mixed
      */
+    //Un getter donde usarmeos más adelante
     public function getId()
     {
         return $this->id;

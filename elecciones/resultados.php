@@ -1,18 +1,20 @@
 <?php
-
+//En esta clase creamos los resultados politicos donde creamos los atributos,
+// getter y setters donde llamaremos o meteremos la info necesaria.
 class resultados
 {
-private $district;
+    //Creación de atributos que los ponemos en privado para que no se puedan usar fuera de esta clase.
+    private $district;
 private $party;
 private $votes;
 
-// podria estar bien tener un identificador "id" y "escaños"
 
     /**
      * @param $district
      * @param $party
      * @param $votes
      */
+    //Creamos un constructyor donde metemos los atributos como parametros
     public function __construct($district, $party, $votes)
     {
         $this->district = $district;
