@@ -1,6 +1,6 @@
 <?php
 
-function ordenyar_partidos_por_votos($a, $b) {
+function sortPartiesCmp($a, $b) {
     if ($a['votes'] == $b['votes']) return 0;
     else return ($a['votes'] > $b['votes']) ? -1 : 1;
 }
@@ -12,12 +12,12 @@ class Dhondt {
     private $votes = 0,$parties = array();
 
     //Ingestamos en el array cada partido con sus votos.
-    public function anyadirPartido($id, $img, $acronym, $distrio_name, $ent, $votes) {
+    public function addParty($id,$img,$acronym,$distrio_name,$ent,$votes) {
         $this->parties[] = array('id'=>$id,'img'=>$img,'acronym'=>$acronym,'district'=>$distrio_name,'ent'=>$ent,'votes'=>$votes,'seats'=>0,'ok'=>true);
         //Sumamos los votos totales.
         $this->votes += $votes;
     }
-    public function proceso() {
+    public function process() {
         //Sumamos el total de votos en blanco con los votos totales distribuidos a los partidos.
         $this->totalVotes = ($this->blankVotes+$this->votes);
 
@@ -40,7 +40,7 @@ class Dhondt {
         }
 
         //Ordenamos los partidos en base a sus escaños.
-        usort($this->parties, "ordenyar_partidos_por_votos");
+        usort($this->parties, "sortPartiesCmp");
     }
     public function getParties() {
         return $this->parties;

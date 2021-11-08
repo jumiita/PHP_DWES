@@ -3,11 +3,11 @@
 // getter y setters donde llamaremos o meteremos la info necesaria.
 class resultados
 {
-    //Creación de atributos que los ponemos en privado para que no se puedan usar fuera de esta clase.
-    private $district;
+private $district;
 private $party;
 private $votes;
 
+// podria estar bien tener un identificador "id" y "escaños"
 
     /**
      * @param $district

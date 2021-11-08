@@ -3,7 +3,7 @@
 // getter y setters donde llamaremos o meteremos la info necesaria.
 class provincias
 {
-//Creación de atributos que los ponemos en privado para que no se puedan usar fuera de esta clase.
+
     private $id;
     private $nombre;
     private $delegados;
@@ -24,7 +24,6 @@ class provincias
     /**
      * @return mixed
      */
-    //Un getter donde usarmeos más adelante
     public function getId()
     {
         return $this->id;

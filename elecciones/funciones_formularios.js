@@ -1,14 +1,14 @@
-
-//Aquí realizamos llamadas  a las funciones según lo que selecciona.
-//En esta clase .js me he apoyado en un compañero de trabajo ya que es sobretodo tema de los formularios.
-
+/*
+Aquí realizamos llamadas  a las funciones según lo que selecciona.
+En esta clase .js me he apoyado en un compañero de trabajo ya que es sobretodo tema de los formularios.
+*/
 function print_districts(district_id) {
     //hacemos una llamada a ajax
     $.ajax({
         //indicamos que lo recogemos por el metodo post
         type: "POST",
         //la dirección donde esta la función que necesitamos
-        url: 'print_data_from_provicias.php',
+        url: 'printar_datos_provincias.php',
         //Indicamos que el parametro que pasamos es igual al distrito
         data:({district_id:district_id}),
         success:function(response){
@@ -20,7 +20,7 @@ function print_districts(district_id) {
 function print_parties(party_id) {
     $.ajax({
         type: "POST",
-        url: 'print_data_from_parties.php',
+        url: 'printar_datos_partidos.php',
         data:({party_id:party_id}),
         success:function(response){
             $('#tabla_calculos').append(response);
@@ -31,7 +31,7 @@ function print_parties(party_id) {
 function print_general() {
     $.ajax({
         type: "POST",
-        url: 'print_data_from_general.php',
+        url: 'printar_datos_general.php',
         data:({}),
         success:function(response){
             $('#tabla_calculos').append(response);

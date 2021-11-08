@@ -1,9 +1,9 @@
 <?php
 include("funciones.php");
+//En esta clase main he decidido dejar solo el html para no saturar ya que como consejo de un compañero de trabajo.
+////En el main anterior llegue a las 450 lineas y era muy lioso cada vez que llamas a una funcion o si te falla algo..
 ?>
 
-//En esta clase main he decidido dejar solo el html para no saturar ya que como consejo de un compañero de trabajo.
-//En el main anterior llegue a las 450 lineas y era muy lioso cada vez que llamas a una funcion o si te falla algo..
 <html lang="es">
 <head>
     <title>Election Results</title>
@@ -13,7 +13,7 @@ include("funciones.php");
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="funcionesParaFormularios.js"></script>
+    <script type="text/javascript" src="funciones_formularios.js"></script>
     <style>body {
             margin: 20px
         }
