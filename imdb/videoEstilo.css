@@ -1,0 +1,115 @@
+.organiza{
+    padding: 2%;
+    border-collapse: collapse;
+    border: solid 2px black;
+}
+table, th, td {
+    text-align: center;
+    border:2px solid black;
+    border-collapse: collapse;
+}
+td{
+    color: whitesmoke;
+}
+.tablita{
+    border: solid 2px white;
+    border-radius: 14px;
+    margin: 2%;
+    border-collapse: collapse;
+}
+th{
+    color: yellow;!important;
+}
+h2{
+  margin-bottom: 5px;
+    margin-top: 5px;
+    text-align: center;
+    color: whitesmoke;
+}
+h1{
+    margin-left: 45%;
+    margin-top: 5px;
+    text-align: center;
+    color: black;
+}
+.contenedor{
+    border-collapse: collapse;
+    border: white solid 2px;
+    border-radius: 10px;
+    color: white;
+}
+
+body{
+    background-color: #111111;
+}
+
+
+
+ul li {
+    text-decoration: none;
+    list-style: none;
+    display: inline;
+    margin: 10px 10px 10px 10px;
+    justify-content: center;
+    margin-left: 30px;
+    border-collapse: collapse;
+}
+.flex:hover, .header:hover, li:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(gold), to(orange));
+    background: linear-gradient(gold, orange);
+}
+.flex {
+    border-collapse: collapse;
+    padding: 10px;
+    padding-top: 20px;
+    border: solid black 2px;
+    background-color: yellow;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.ptr{
+    margin-top: 2%;
+    color: yellow;
+}
+
+.izquierda{
+    text-align: center;
+    position: absolute;
+    margin-left: 1%;
+    margin-top: 10px;
+}
+img{
+    width: 310px;
+    height: auto;
+}
+.letras{
+    margin-top: -5px;
+    margin-left: 50px;
+    margin-bottom: 1%;
+}
+
+.atras{
+    position: absolute;
+    right: 10%;
+}
+i {
+    color: white;
+    font-size: 48px;
+}
+a:link,a:visited,a:hover{
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+}
+form{
+    text-align: center;
+}
+.logueate{
+    margin-top: 2%;
+    margin-bottom: -15px;
+}
+.gusta{
+  margin-left: 100px;
+    padding: 100px;
+}

@@ -4,7 +4,7 @@ include_once "sql.php";
 include_once  "staff.php";
 include_once  "multimedia.php";
 
-class principal
+class pelicula
 {
 
     private string $id;
