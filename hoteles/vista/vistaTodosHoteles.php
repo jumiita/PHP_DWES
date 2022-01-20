@@ -24,7 +24,37 @@
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning bg-opacity-50 sticky-top">
+    <a class="navbar-brand ">
+        <img src="../img/imagenhoteles.png" width="25">
+    </a>
+    <a class="navbar-brand " href="#">Reserva el Top 10 hoteles</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ">
 
+            <li class="nav-item active ">
+                <a class="nav-link" href="#">Quienes somos </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#">Experiencia</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="../controlador/listaHotel.php">Home</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </form>
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </div>
+</nav>
 <h1>Reserva el mejor top 10 hoteles</h1>
 <?php
 foreach ($hoteles as $hotel) {
@@ -37,11 +67,8 @@ foreach ($hoteles as $hotel) {
             <p class="card-text"><?php echo $hotel->getDescripcion(); ?></p>
             <h4>Puntuación</h4>
             <p><?php echo $hotel->getPuntuacion(); ?><i class="fas fa-star"></i></p>
-            <a href="#!" class="card-link"><img src="<?php echo $hotel->getId(); ?>"></a>
             <a href="../controlador/listaImagenHotel.php?id=<?php echo $hotel->getId(); ?>">
-                <img src="../img/riuPlazaMadrid4.webp"></a>
-
-
+                <img src="<?php echo $hotel->get_imagenes()[1]->getImagen()[1]; ?>"></a>
         </div>
     </div>
 <?php } ?>
