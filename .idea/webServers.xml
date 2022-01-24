@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b20fc85a-a6b6-4af5-a4ce-e843c1567d5f" name="jumaFernandez" url="http://ftp.dawsonferrer.com">
+        <fileTransfer host="ftp.dawsonferrer.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="72a93166-c4d4-49a5-9c95-01fde83f1eaa" name="localhost" url="http://localhost/jFernandezTema2/">
+        <fileTransfer mountedRoot="$PROJECT_DIR$" accessType="MOUNT" port="0" />
+      </webServer>
+      <webServer id="733c8701-feb7-4da3-a7f2-fd0cc2d01870" name="localmente" url="http://localhost">
+        <fileTransfer mountedRoot="$PROJECT_DIR$" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

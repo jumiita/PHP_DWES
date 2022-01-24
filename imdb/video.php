@@ -116,9 +116,9 @@ if ($_SESSION['login'] == true) {
         if (isset($_POST['comentario']) && isset($_SESSION['userId'])&& $_POST["puntua"] !=""&& $_POST["comentario"] !="") {
             $comenta = $_POST["comentario"];
             $sql->insertar_comentario($comenta, $titulo->getId(), $_SESSION['userId'],$_POST["puntua"]);
-        } else if($_POST["puntua"]=="") {
+        } else if(isset($_POST["puntua"])=="") {
             echo '<script>alert("El campo de la puntuación esta vacío")</script>';
-        }else if($_POST["comentario"]=="") {
+        }else if(isset($_POST["comentario"])=="") {
             echo '<script>alert("El campo de la comentario esta vacío")</script>';
         }
     ?>

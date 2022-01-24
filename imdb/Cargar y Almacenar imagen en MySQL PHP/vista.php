@@ -15,7 +15,7 @@ if(!empty($_GET['id'])){
     }
     
     //Extraer imagen de la BD mediante GET
-    $result = $db->query("SELECT url FROM multimedia WHERE id = {$_GET['id']}");
+    $result = $db->query("SELECT url FROM imagen WHERE id = {$_GET['id']}");
     
     if($result->num_rows > 0){
         $imgDatos = $result->fetch_assoc();

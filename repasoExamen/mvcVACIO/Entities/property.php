@@ -2,7 +2,7 @@
 
 include_once "country.php";
 include_once "city.php";
-include_once "neighborhoods.php";
+include_once "neighborhood.php";
 include_once "multimedias.php";
 include_once "states.php";
 
@@ -27,7 +27,7 @@ class property {
      * @param country $countryId
      * @param int $stateId
      * @param city $cityId
-     * @param int $neighborhoodId
+     * @param neighborhoods $neighborhoodId
      * @param int $zipcode
      * @param float $latitude
      * @param float $longitude
@@ -38,7 +38,7 @@ class property {
      * @param int $surface
      * @param int $price
      */
-    public function __construct(int $id, country $countryId, int $stateId, city $cityId, int $neighborhoodId, int $zipcode, float $latitude, float $longitude, DateTime $date, string $description, int $bathrooms, int $floor, int $surface, int $price)
+    public function __construct(int $id, country $countryId, int $stateId, city $cityId, neighborhoods $neighborhoodId, int $zipcode, float $latitude, float $longitude, DateTime $date, string $description, int $bathrooms, int $floor, int $surface, int $price)
     {
         $this->id = $id;
         $this->countryId = $countryId;

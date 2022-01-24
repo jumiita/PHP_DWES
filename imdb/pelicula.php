@@ -8,7 +8,7 @@ class pelicula
 {
 
     private string $id;
-    private multimedia $idMultimedia;
+    private imagen $idMultimedia;
     private string $titulo;
     private string $genero;
     private int $puntuacion;
@@ -17,14 +17,14 @@ class pelicula
 
     /**
      * @param string $id
-     * @param multimedia $idMultimedia
+     * @param imagen $idMultimedia
      * @param string $titulo
      * @param string $genero
      * @param int $puntuacion
      * @param staff $idStaff
      * @param string $descripcion
      */
-    public function __construct(string $id, multimedia $idMultimedia, string $titulo, string $genero, int $puntuacion, staff $idStaff, string $descripcion)
+    public function __construct(string $id, imagen $idMultimedia, string $titulo, string $genero, int $puntuacion, staff $idStaff, string $descripcion)
     {
         $this->id = $id;
         $this->idMultimedia = $idMultimedia;
@@ -44,9 +44,9 @@ class pelicula
     }
 
     /**
-     * @return multimedia
+     * @return imagen
      */
-    public function getIdMultimedia(): multimedia
+    public function getIdMultimedia(): imagen
     {
         return $this->idMultimedia;
     }

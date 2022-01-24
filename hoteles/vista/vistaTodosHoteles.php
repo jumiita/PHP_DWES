@@ -13,7 +13,7 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
     <style>
-        img {
+        .slider{
             width: 160px;
             height: 160px;
         }
@@ -68,7 +68,7 @@ foreach ($hoteles as $hotel) {
             <h4>Puntuación</h4>
             <p><?php echo $hotel->getPuntuacion(); ?><i class="fas fa-star"></i></p>
             <a href="../controlador/listaImagenHotel.php?id=<?php echo $hotel->getId(); ?>">
-                <img src="<?php echo $hotel->get_imagenes()[1]->getImagen()[1]; ?>"></a>
+                <img class="slider" src="<?php echo $hotel->getMultimedias()[2]->getImagen(); ?>"></a>
         </div>
     </div>
 <?php } ?>

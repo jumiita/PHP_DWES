@@ -1,5 +1,5 @@
 <?php
-
+//
 class country {
     protected int $id;
     protected string $name;

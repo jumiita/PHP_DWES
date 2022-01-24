@@ -26,7 +26,7 @@ if(isset($_POST["submit"])){
 
 
         //Insert image content into database
-        $insert = $db->query("INSERT into multimedia (url, yt) VALUES ('$imgContent', ' ')");
+        $insert = $db->query("INSERT into imagen (url, yt) VALUES ('$imgContent', ' ')");
         if($insert){
             echo "File uploaded successfully.";
         }else{

@@ -29,12 +29,12 @@ class sql extends mysqli{
     }
 
     public function get_img_video($id){
-        $sql = "select * from multimedia where id=".$id;
+        $sql = "select * from imagen where id=".$id;
         $this->default();
         $query = $this->query($sql);
         $this->close();
         $result = $query->fetch_assoc();
-        $return = new multimedia($result["id"],$result["url"],$result["yt"]);
+        $return = new imagen($result["id"],$result["url"],$result["yt"]);
         return $return;
 
     }

@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `multimedia`
+-- Estructura de tabla para la tabla `imagen`
 --
 
 CREATE TABLE `multimedia` (
@@ -34,7 +34,7 @@ CREATE TABLE `multimedia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `multimedia`
+-- Volcado de datos para la tabla `imagen`
 --
 
 INSERT INTO `multimedia` (`id`, `url`, `yt`) VALUES
@@ -168,7 +168,7 @@ INSERT INTO `usuarios` (`id`, `email`, `nombre`, `password`) VALUES
 --
 
 --
--- Indices de la tabla `multimedia`
+-- Indices de la tabla `imagen`
 --
 ALTER TABLE `multimedia`
   ADD PRIMARY KEY (`id`);
@@ -199,7 +199,7 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `multimedia`
+-- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `multimedia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;

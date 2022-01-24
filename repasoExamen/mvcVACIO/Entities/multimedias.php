@@ -1,5 +1,5 @@
 <?php
-
+//
 class multimedias{
     protected int $id;
     protected  int $propertyId;

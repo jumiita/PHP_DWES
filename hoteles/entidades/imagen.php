@@ -1,6 +1,6 @@
 <?php
 
-class multimediaa
+class imagen
 {
 
     private int $id;

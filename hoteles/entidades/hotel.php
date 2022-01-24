@@ -1,5 +1,5 @@
 <?php
-include_once "multimediaa.php";
+include_once "imagen.php";
 
 class hotel
 {
@@ -16,7 +16,7 @@ class hotel
     /**
      * @param int $id
      * @param int $ciudad_id
-     * @param multimediaa $multimedias
+     * @param imagen $multimedias
      * @param string $nombre
      * @param int $puntuacion
      * @param string $regimen
@@ -52,7 +52,7 @@ class hotel
     }
 
     /**
-     * @return multimediaas
+     * @return multimedias
      */
     public function getMultimedias(): array
     {

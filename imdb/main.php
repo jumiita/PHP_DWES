@@ -40,6 +40,7 @@ if (isset($_POST['entrar'])) {
             crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="mainEstilo.css">
+
 </head>
 <body>
 

@@ -1,8 +1,9 @@
 <?php
-
-class neighborhoods {
+//
+class neighborhood
+{
     protected int $id;
-    protected  string $name;
+    protected string $name;
 
     /**
      * @param int $id
@@ -29,7 +30,4 @@ class neighborhoods {
     {
         return $this->name;
     }
-
-
 }
-?>
