@@ -4,41 +4,43 @@ include_once "country.php";
 include_once "city.php";
 include_once "neighborhood.php";
 include_once "multimedias.php";
-include_once "states.php";
+include_once "state.php";
 
 class property {
     protected int $id;
     protected  country $countryId;
-    protected  int $stateId;
+    protected  state $stateId;
     protected city $cityId;
-    protected neighborhoods $neighborhoodId;
+    protected neighborhood $neighborhoodId;
     protected int $zipcode;
     protected float $latitude;
     protected float $longitude;
-    protected DateTime $date;
+    protected string $date;
     protected string $description;
     protected int $bathrooms;
     protected int $floor;
     protected  int $surface;
     protected int $price;
+    protected array $imagenes;
 
     /**
      * @param int $id
      * @param country $countryId
-     * @param int $stateId
+     * @param state $stateId
      * @param city $cityId
-     * @param neighborhoods $neighborhoodId
+     * @param neighborhood $neighborhoodId
      * @param int $zipcode
      * @param float $latitude
      * @param float $longitude
-     * @param DateTime $date
+     * @param string $date
      * @param string $description
      * @param int $bathrooms
      * @param int $floor
      * @param int $surface
      * @param int $price
+     * @param array $imagenes
      */
-    public function __construct(int $id, country $countryId, int $stateId, city $cityId, neighborhoods $neighborhoodId, int $zipcode, float $latitude, float $longitude, DateTime $date, string $description, int $bathrooms, int $floor, int $surface, int $price)
+    public function __construct(int $id, country $countryId, state $stateId, city $cityId, neighborhood $neighborhoodId, int $zipcode, float $latitude, float $longitude, string $date, string $description, int $bathrooms, int $floor, int $surface, int $price, array $imagenes)
     {
         $this->id = $id;
         $this->countryId = $countryId;
@@ -54,6 +56,7 @@ class property {
         $this->floor = $floor;
         $this->surface = $surface;
         $this->price = $price;
+        $this->imagenes = $imagenes;
     }
 
     /**
@@ -73,9 +76,9 @@ class property {
     }
 
     /**
-     * @return int
+     * @return state
      */
-    public function getStateId(): int
+    public function getStateId(): state
     {
         return $this->stateId;
     }
@@ -89,9 +92,9 @@ class property {
     }
 
     /**
-     * @return int
+     * @return neighborhood
      */
-    public function getNeighborhoodId(): int
+    public function getNeighborhoodId(): neighborhood
     {
         return $this->neighborhoodId;
     }
@@ -121,9 +124,9 @@ class property {
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getDate(): DateTime
+    public function getDate(): string
     {
         return $this->date;
     }
@@ -166,6 +169,14 @@ class property {
     public function getPrice(): int
     {
         return $this->price;
+    }
+
+    /**
+     * @return array
+     */
+    public function getImagenes(): array
+    {
+        return $this->imagenes;
     }
 
 

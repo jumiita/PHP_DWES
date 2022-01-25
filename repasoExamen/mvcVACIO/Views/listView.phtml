@@ -1,4 +1,9 @@
-
+<?php
+/**
+ * @var array $property
+ * @var array $imagen
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,17 +11,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+        table,tr,th,td{
+            border-collapse: collapse;
+            border: solid 2px black;
+        }
+    </style>
+    <title>Hoteles pagina2</title>
 </head>
 
 
 <body>
+ <h1>Hoteles mallorca</h1>
 <?php foreach ($property as $properties){ ?>
     <table>
-        <th><?php $properties->getBathrooms(); ?></th>
-        <th>cabeza2<?php $properties->getRooms(); ?></th>
-        <tr>titul</tr>
-        <tr>titul2</tr>
+        <tr>
+        <th>PRECIO: <?php echo $properties->getPrice(); ?></th>
+        <th>ciudad <?php echo $properties->getCityId()->getName(); ?></th>
+            <th>ciudad</th>
+            <th>baños</th>
+            <th>codigo postal</th>
+        </tr>
+        <tr>
+        <td><?php echo $properties->getBathrooms(); ?></td>
+        <td>DESCRIPCIÓN: <?php echo $properties->getDescription(); ?></td>
+        <td>imagen:
+            <a href="../Controllers/listaDetalleController.php?id=<?php echo $properties->getId(); ?>">
+                <img src=" <?php echo $properties->getImagenes()[0]->getUrl(); ?>">
+            </a>
+        </td>
+           <td><?php echo $properties->getBathrooms(); ?></td>
+        <td><p><?php echo $properties->getZipcode(); ?>"</p></td>
+        </tr>
+
     </table>
 <?php } ?>
 </body>

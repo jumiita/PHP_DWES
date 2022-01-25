@@ -1,0 +1,79 @@
+<?php
+/**
+ * @var array $property
+ * @var array $imagen
+ */
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="../Styles/main.css" rel="stylesheet">
+    <link href="../Styles/login.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Formulario de la muerte</title>
+</head>
+
+<body>
+<h1>Rellena el formulario</h1>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Login Form -->
+        <form method="post">
+            <input type="text" id="mail" class="fadeIn second" name="mail" placeholder="mail">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+    </div>
+
+<br><br><br>
+    <?php
+    if ($_SESSION['login']==true){
+        echo $_SESSION['user'];
+    }
+  ?>
+    <h1>Logquin Mortal</h1>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Login Form -->
+            <form method="post">
+                <input type="text" id="mail" class="fadeIn second" name="mail_login" placeholder="mail">
+                <input type="password" id="password" class="fadeIn third" name="password_login" placeholder="password">
+                <input type="submit" class="fadeIn fourth" value="Inicia Sesión">
+            </form>
+        </div>
+
+</div>
+
+<?php foreach ($property as $properties){ ?>
+    <table>
+        <tr>
+            <th>PRECIO: <?php echo $properties->getPrice(); ?></th>
+            <th>ciudad <?php echo $properties->getCityId()->getName(); ?></th>
+            <th>ciudad</th>
+            <th>baños</th>
+            <th>código postal</th>
+        </tr>
+        <tr>
+            <td><?php echo $properties->getBathrooms(); ?></td>
+            <td>DESCRIPCIÓN: <?php echo $properties->getDescription(); ?></td>
+            <td>imagen:
+                <a href="../Controllers/listaDetalleController.php?id=<?php echo $properties->getId(); ?>">
+                    <img src=" <?php echo $properties->getImagenes()[0]->getUrl(); ?>">
+                </a>
+            </td>
+            <td><?php echo $properties->getBathrooms(); ?></td>
+            <td><p><?php echo $properties->getZipcode(); ?>"</p></td>
+        </tr>
+
+    </table>
+<?php } ?>
+</body>
+</html>

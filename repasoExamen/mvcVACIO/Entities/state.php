@@ -1,6 +1,6 @@
 <?php
 
-class states{
+class state{
     protected int $id;
     protected string $name;
 
