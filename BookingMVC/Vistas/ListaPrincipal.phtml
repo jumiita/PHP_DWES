@@ -1,0 +1,101 @@
+<?php
+/**
+ * @var $hoteles
+ */
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas de hotel cutre</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="../Styles/main.css" rel="stylesheet">
+    <link href="../Styles/login.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .slider{
+            width: 160px;
+            height: 160px;
+        }
+
+        body {
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning bg-opacity-50 sticky-top">
+    <a class="navbar-brand ">
+        <img src="../img/imagenhoteles.png" width="25">
+    </a>
+    <a class="navbar-brand " href="#">Reserva el Top 10 hoteles</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ">
+
+            <li class="nav-item active ">
+                <a class="nav-link" href="#">Quienes somos </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#">Experiencia</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="../controlador/listaHotel.php">Home</a>
+            </li>
+            <?php if ($_SESSION['login']== true){
+                echo $_SESSION['user'];
+                ?>
+            <li>
+    <div> <a href="../Controlador/controladorLogout.php" class="btn btn-info btn-round" role="button">
+            Logout
+        </a></div>
+            </li>
+            <?php   } else { ?>
+
+
+            <li>
+                <p>&nbsp;&nbsp;</p>
+            </li>
+            <li>
+                <div> <a href="../Controlador/controladorLogin.php" class="btn btn-info btn-round" role="button">
+                        Loguin
+                    </a></div>
+            </li>
+            <?php }?>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </form>
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </div>
+</nav>
+<h1>Reserva el mejor top 10 hoteles</h1>
+<?php
+ foreach ($hoteles as $hotel){ ?>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Hotel</h4>
+            <h6 class="card-subtitle mb-2 text-muted"><?php echo $hotel->getNombre() . ", " . $hotel->getEstado(); ?></h6>
+            <h3>Descripción</h3>
+            <p class="card-text"><?php echo $hotel->getDescripcion(); ?></p>
+            <h4>Puntuación</h4>
+            <p><?php echo $hotel->getPuntuacion(); ?><i class="fas fa-star"></i></p>
+            <a href="../Controlador/controladorHotelDetalle.php?id=<?php echo $hotel->getIdHotel(); ?>">
+                <img src="<?php echo $hotel->getImagenes()[0]->getUrl(); ?>"></a>
+        </div>
+        <div> <a href="../Controlador/controladorReservas.php?id=<?php echo $hotel->getIdHotel(); ?>" class="btn btn-info btn-round" role="button">
+                Reserva
+            </a></div>
+    </div>
+<?php } ?>
+</body>
+</html>

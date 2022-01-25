@@ -1,1 +1,0 @@
-Sistema creado con PHP y MySql, HTML5, CSS3
