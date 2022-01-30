@@ -1,0 +1,78 @@
+<?php
+/**
+ * @var $tablas
+ * @var $usuario
+ */
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>World Game</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Countries</h1>
+<br>
+<h2>My countries</h2>
+<table>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Population</th>
+        <th>GNP</th>
+        <th>NumLanguages</th>
+        <th>NumCities</th>
+        <th>Owner</th>
+    </tr>
+    <?php foreach ( $jugador as $tabla){ ?>
+    <tr>
+        <td><?php echo $tabla->getCode(); ?></td>
+        <td><?php echo $tabla->getName(); ?></td>
+        <td><?php echo $tabla->getPopulation(); ?></td>
+        <td><?php echo $tabla->getGNP() ?></td>
+        <td><?php echo $tabla->getCapital(); ?></td>
+        <td><?php echo $tabla->getUserId(); ?></td>
+        <td><a href="#"></a><?php //echo $usuario->getMail(); ?></td>
+    </tr>
+    <?php } ?>
+</table>
+<br>
+<h2>Other countries</h2>
+<table>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Population</th>
+        <th>GNP</th>
+        <th>NumLanguages</th>
+        <th>NumCities</th>
+        <th>Owner</th>
+        <th>Action</th>
+    </tr>
+<?php foreach ($ciudades as $city) { ?>
+    <tr>
+        <td><?php echo $city->getCode(); ?></td>
+        <td>Aruba</td>
+        <td>103000</td>
+        <td>828</td>
+        <td>4</td>
+        <td>1</td>
+        <td><b>Taer Moso</b></td>
+        <td><a href="?action=attack&countryCode=ABW">Attack</a></td>
+    </tr>
+   <?php } ?>
+    <a href="../CONTROLADOR/controladorLogout.php">Logout</a>
+</table>
+</body>
+</html>
