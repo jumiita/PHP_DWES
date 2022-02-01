@@ -23,7 +23,7 @@ public function comprobarUsuario($mail,$password){
     $query = $this->db->query($sql);
     $this->db->close();
     if ($result = $query->fetch_assoc()) {
-        if (crypt($password, $result["password"]) == $result["password"]) {
+        if (crypt($password, $result["Password"]) == $result["Password"]) {
             return  new users($result['Id'],$result['Mail'],$result['Password']);
         }
     }
@@ -37,7 +37,7 @@ public function comprobarUsuario($mail,$password){
             $query = $this->db->query($sql);
             $this->db->close();
             $result = $query->fetch_assoc();
-            return new users($result['id'], $result['Mail'], $result['Password']);
+            return new users($result['Id'], $result['Mail'], $result['Password']);
         }
         return new users(0, "", "");
     }

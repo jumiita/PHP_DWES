@@ -1,12 +1,13 @@
 <?php
 
 include_once "../MODELO/modeloPaginaPrincipal.php";
+
 session_start();
 $modelo = new modeloPaginaPrincipal();
 
- $modelo->getCountrys($_SESSION['login']);
-
 $ciudades = $modelo->getCountries();
-$jugador = $modelo->getCountryUserId($_SESSION['login']);
+
+$jugador = $modelo->getCountryUserId($_SESSION['login']->getId());
+$fuerza = 0;
 
 require_once "../VISTA/vistaPAginaPrincipal.phtml";

@@ -1,7 +1,8 @@
 <?php
 /**
- * @var $tablas
+ * @var $jugador
  * @var $usuario
+ * @var $ciudades
  */
 ?>
 <!DOCTYPE html>
@@ -42,10 +43,13 @@
         <td><?php echo $tabla->getPopulation(); ?></td>
         <td><?php echo $tabla->getGNP() ?></td>
         <td><?php echo $tabla->getCapital(); ?></td>
-        <td><?php echo $tabla->getUserId(); ?></td>
-        <td><a href="#"></a><?php //echo $usuario->getMail(); ?></td>
+        <td><?php echo $tabla->getUserId()->getId(); ?></td>
+        <td><a href="#"></a><?php echo $tabla->getUserId()->getMail(); ?></td>
     </tr>
+        <?php $fuerza = $fuerza + $tabla->getPopulation() + $tabla->getGNP();
+        //$fuerza = number_format($fuerza,0,0,0)?>
     <?php } ?>
+    <h2><?php echo"Fuerza total del ususario: ".$fuerza."</h2>"; ?>
 </table>
 <br>
 <h2>Other countries</h2>
@@ -63,13 +67,14 @@
 <?php foreach ($ciudades as $city) { ?>
     <tr>
         <td><?php echo $city->getCode(); ?></td>
-        <td>Aruba</td>
-        <td>103000</td>
-        <td>828</td>
-        <td>4</td>
-        <td>1</td>
-        <td><b>Taer Moso</b></td>
-        <td><a href="?action=attack&countryCode=ABW">Attack</a></td>
+        <td><?php echo $city->getName(); ?></td>
+        <td><?php echo $city->getPopulation(); ?></td>
+        <td><?php echo $city->getGNP(); ?></td>
+        <td><?php echo $city->getCapital(); ?></td>
+        <td><?php  echo $city->getUserId()->getId(); ?></td>
+        <td><b><?php echo $city->getUserId()->getMail(); ?></b></td>
+        <?php $fuerzaPais =  $city->getPopulation() + $city->getGNP(); ?>
+        <td><a href="../CONTROLADOR/controladorAtaque.php?Code=<?php echo $city->getCode() . "&FuerzaPais=".$fuerzaPais."&FuerzaUsuario=".$fuerza; ?>">Attack</a></td>
     </tr>
    <?php } ?>
     <a href="../CONTROLADOR/controladorLogout.php">Logout</a>

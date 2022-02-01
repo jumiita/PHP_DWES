@@ -15,10 +15,14 @@ if (isset($_POST['mail']) && isset($_POST['password'])){
                 $password = crypt($_POST["password"], "salt");
             }
             $insertar = $modelo->insertUser($_POST['mail'], $password);
+            if($insertar >0){
+                $modelo->randomCity($insertar);
+            }
+
             header("Location: ../CONTROLADOR/controladorLogin.php");
         }
     }
-
+    echo "<script>alert('Has introducido la contraseña mal, vuelve a probar')</script>";
 }
 require_once "../VISTA/vistaRegistro.phtml";
 
