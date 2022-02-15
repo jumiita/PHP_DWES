@@ -15,6 +15,7 @@
     <link href="../Styles/login.css" rel="stylesheet">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <style>
         .slider{
             width: 160px;
@@ -60,9 +61,7 @@
         </a></div>
             </li>
             <?php   } else { ?>
-
-
-            <li>
+                <li>
                 <p>&nbsp;&nbsp;</p>
             </li>
             <li>
@@ -89,13 +88,17 @@
             <p class="card-text"><?php echo $hotel->getDescripcion(); ?></p>
             <h4>Puntuación</h4>
             <p><?php echo $hotel->getPuntuacion(); ?><i class="fas fa-star"></i></p>
+            <h4>Ciudad</h4>
+            <p><?php //echo $hotel-> getCiudad(); ?></p>
             <a href="../Controlador/controladorHotelDetalle.php?id=<?php echo $hotel->getIdHotel(); ?>">
                 <img src="<?php echo $hotel->getImagenes()[0]->getUrl(); ?>"></a>
+
         </div>
         <div> <a href="../Controlador/controladorReservas.php?id=<?php echo $hotel->getIdHotel(); ?>" class="btn btn-info btn-round" role="button">
                 Reserva
             </a></div>
     </div>
 <?php } ?>
+
 </body>
 </html>

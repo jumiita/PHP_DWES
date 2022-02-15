@@ -1,0 +1,60 @@
+<?php
+/**
+ * @lista
+ */
+?>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://dawsonferrer.com/allabres/ddbb/mallorcasa/styles/main.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Mallorcasa</title>
+</head>
+<body>
+<section class="head">
+    <div class="container">
+        <h2 class="text-center"><span><a href="list.php">IMDB</a></span></h2>
+    </div>
+</section>
+<?php  foreach ($lista as $lis){ ?>
+<div class="clearfix"></div>
+<section class="search-box">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 listing-block">
+                <div id="property-135472387" class="media">
+                    <div class="fav-box">
+                        <a href="?propertyId=135472387">
+                            <i class="fa fa-map-pin" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <img class="d-flex align-self-start"
+                         src="https://dawsonferrer.com/allabres/apis_solutions/mallorcasa/images/property_135472387_image_13850.jpg"
+                         alt="Generic placeholder image">
+                    <div class="media-body pl-3">
+                        <div class="price">
+                            <a href="singleproperty.php?id=135472387">
+                                <?php echo $lis->getTitulo(); ?>
+                            </a>
+                            <small><?php echo $lis->getGenero(); ?></small>
+                        </div>
+                        <div class="stats">
+                            <span><i class="fa fa-arrows-alt"></i><?php echo $lis->getDescripcion(); ?></span>
+                            <span><i class="fa fa-bed"></i>6 Bedrooms</span>
+                            <span><i class="fa fa-bath"></i>4 Bathrooms</span>
+                        </div>
+
+                        <div class="address">07190, Esporles</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>  <?php  } ?>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<?php
+/**
+ * @var $hoteles
+ */
+?>
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <style>
+        img {
+            height: 90px;
+        }
+
+        body {
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark sticky-top">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"></a>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Viajes <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hoteles</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                   data-toggle="dropdown">Coches</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item"
+                                                                    href="#">Contacto</a> <a class="dropdown-item"
+                                                                                             href="#">Entradas</a>
+                    <div class="dropdown-divider">
+                    </div>
+                    <a class="dropdown-item" href="#">Curiosidades</a>
+                </div>
+            </li>
+            <li>
+                <form class="form-inline ">
+
+                    <input class="form-control mr-sm-2" type="text"/>
+                    <button class="btn btn-warning my-2 my-sm-0" type="submit">
+                        Buscar
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h2 class="text-center mt-4"> Hoteles de front-end</h2>
+
+<div class="container-fluid ">
+
+    <div class="row d-flex flex-wrap ">
+        <?php foreach ($hoteles as $hotel) { ?>
+            <div class="col-md-4">
+
+                <div class="card" >
+
+                    <div class="card-body">
+                        <h3 class="card-title"> <?php echo $hotel->nombre; ?></h3>
+                        <p class="card-text"><?php echo $hotel->descripcion; ?></p>
+                        <h2> Imagenes</h2>
+                        <?php foreach ($hotel->imagenes as $imagen){ ?>
+                        <a href="llamadaApiPaginaDetalle.php?id=<?php echo $hotel->id_hotel; ?>" class="btn btn-primary"> <img src="<?php echo $imagen->url; ?>"> <?php } ?></a>
+                        <h2>Puntuación</h2>
+                        <p><?php echo $hotel->puntuacion; ?> <i class="far fa-star"></i></p>
+                    </div>
+                    <div> <a href="Controlador/llamadaApiPaginaDetalle.php?id=<?php echo $hotel->id_hotel; ?>" class="btn btn-info btn-round" role="button">
+                            Reserva
+                        </a></div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+</body>
+
+</html>

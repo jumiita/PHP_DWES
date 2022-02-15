@@ -3,13 +3,13 @@
 class hotel
 {
 
-    protected $id_hotel;
-    protected $nombre;
+    protected  $id_hotel;
+    protected  string $nombre;
     protected $estado;
-    protected $descripcion;
-    protected $zona;
+    protected  string $descripcion;
+    protected  string $zona;
     protected $ciudad_id;
-    protected $puntuacion;
+    protected string $puntuacion;
     protected $imagenes;
 
     /**

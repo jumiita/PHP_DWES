@@ -2,6 +2,7 @@
 /**
  * @var $hotel
  * @var $imagenes
+ * @var $habitaciones
  */
 ?>
 
@@ -18,7 +19,15 @@
             crossorigin="anonymous"></script>
     <title>Vista única</title>
     <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
 
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +36,7 @@
     <a class="navbar-brand ">
         <img src="../img/imagenhoteles.png" width="25">
     </a>
-    <a class="navbar-brand " href="../controlador/listaHotel.php">Reserva el Top 10 hoteles</a>
+    <a class="navbar-brand " href="../Controlador/controladorPaginaPrincipal.php">Reserva el Top 10 hoteles</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -57,40 +66,54 @@
 </nav>
 <h1>Apunto de reservar, un pasito más...</h1>
 
-<?php foreach ($hotel as $hotelito){ ?>
-<div class="container">
- <div>
-     <h1><?php echo $hotelito->getNombre(); ?> </h1>
- </div>
-    <div>
-      <table>
-          <tr>
-              <td>Descripción: </td>
-              <td> estado: </td>
-              <td> zona: </td>
-          </tr>
-          <tr>
-              <th>
-                  <?php echo $hotelito->getDescripcion(); ?>
-              </th>
-              <th>
-                  <?php echo $hotelito->getEstado(); ?>
-              </th>
-              <th>
-                  <?php echo $hotelito->getZona(); ?>
-              </th>
+<?php foreach ($hotel as $hotelito) { ?>
+    <div class="container">
+        <div class="row">
+        <div>
 
-          </tr>
-      </table>
-    </div>
-</div>
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Zona</th>
+                    <th>Ciudad</th>
+                    <th>Puntuación</th>
+                </tr>
+                <tr>
+                    <td>116</td>
+                    <td>  <?php echo $hotelito->getDescripcion(); ?></td>
+                    <td><?php echo $hotelito->getEstado(); ?></td>
+                    <td><?php echo $hotelito->getZona(); ?></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+
+
+
+        </div>
+        </div>
 <?php } ?>
 
-    <?php foreach ($imagenes as $imagen){ ?>
-            <div class="container-fluid">
-             <img src="<?php echo $imagen->getUrl(); ?>">
-            </div>
+        <div class="row">
+<div class="multi-carousel vertical" style="max-width: 20rem;">
+
+    <div class="multi-carousel-inner">
+        <?php foreach ($imagenes
+
+        as $imagen){ ?>
+        <div class="multi-carousel-item">
+            <img src="<?php echo $imagen->getUrl(); ?>" alt="Winter Landscape" class="max-width: 20rem;"/>
+        </div>
+
+    </div>
+</div>
     <?php } ?>
+
+
+
+</div>
 </div>
 </body>
 </html>
